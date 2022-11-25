@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchBar = () => {
+const SearchBar = (props) => {
   return (
     <div className="search">
       <label id="search-label" htmlFor="search-input">
@@ -11,6 +11,7 @@ const SearchBar = () => {
         type="text"
         name="search-input"
         placeholder="Search ..."
+        onChange={props.handleChange}
       />
     </div>
   );
