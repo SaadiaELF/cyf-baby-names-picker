@@ -1,6 +1,7 @@
 import babyNames from "./babyNamesData.json";
-import "./App.css";
 import Name from "./components/Name";
+import SearchBar from "./components/SearchBar";
+import "./App.css";
 
 const sortedNames = babyNames.sort((a, b) => {
   let nA = a.name.toLowerCase();
@@ -18,6 +19,7 @@ const sortedNames = babyNames.sort((a, b) => {
 function App() {
   return (
     <div className="App">
+      <SearchBar />
       <div className="names-container">
         {sortedNames.map((baby, index) => {
           return (

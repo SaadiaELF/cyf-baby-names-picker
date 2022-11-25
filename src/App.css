@@ -15,6 +15,34 @@ body {
   font-family: var(--font);
 }
 
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  align-self: center;
+  margin: 2rem;
+}
+
+#search-label {
+  align-self: center;
+  margin-right: 1rem;
+  font-size: 1.2rem;
+}
+
+#search-input {
+  width: 210px;
+  height: 30px;
+  padding-left: 0.5em;
+  font-family: var(--font);
+  font-size: 1.2rem;
+  font-weight: 200;
+  border: 1px solid var(--dark-grey);
+  border-radius: 10px;
+  align-self: center;
+}
+
 .names-container {
   display: grid;
   gap: 0.5rem;
@@ -28,7 +56,6 @@ body {
 .name-div {
   width: 80px;
   padding: 0.5rem;
-  border: 1px solid var(--light-grey);
   text-align: center;
   line-height: 2.4rem;
   border-radius: 10px;
