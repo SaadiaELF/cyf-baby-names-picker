@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import babyNames from "./babyNamesData.json";
-import Name from "./components/Name";
 import SearchBar from "./components/SearchBar";
 import "./App.css";
+import NamesContainer from "./components/NamesContainer";
+import FavouritesText from "./components/FavouritesText";
+import Separator from "./components/Separator";
 
 function App() {
   const [names, setNames] = useState(babyNames);
@@ -46,37 +48,14 @@ function App() {
   return (
     <div className="App">
       <SearchBar handleChange={handleInputChange} />
-      <div className="favourites-text">
-        <h3>Favourites</h3>
-        <p>Click on name to add it to favourites</p>
-      </div>
-      <div className="names-container">
-        {favouritesNames.map((baby, index) => {
-          return (
-            <Name
-              key={index}
-              name={baby.name}
-              value={index}
-              class={baby.sex + "-name"}
-              handleClick={removeNameFromFavourites}
-            />
-          );
-        })}
-      </div>
-      <div className="separator"></div>
-      <div className="names-container">
-        {names.map((baby, index) => {
-          return (
-            <Name
-              key={index}
-              name={baby.name}
-              value={index}
-              class={baby.sex + "-name"}
-              handleClick={addNameToFavourites}
-            />
-          );
-        })}
-      </div>
+      <Separator />
+      <FavouritesText />
+      <NamesContainer
+        names={favouritesNames}
+        handleClick={removeNameFromFavourites}
+      />
+      <Separator />
+      <NamesContainer names={names} handleClick={addNameToFavourites} />
     </div>
   );
 }

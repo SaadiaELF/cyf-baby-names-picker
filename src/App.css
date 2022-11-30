@@ -45,7 +45,6 @@
 
 .favourites-text {
   text-align: center;
-  margin: 1rem;
 }
 
 .names-container {
@@ -82,5 +81,6 @@
   align-self: center;
   height: 3px;
   width: 90vw;
+  margin: 0.5rem;
   background-color: var(--light-red);
 }
