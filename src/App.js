@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import babyNames from "./babyNamesData.json";
 import SearchBar from "./components/SearchBar";
-import "./App.css";
 import NamesContainer from "./components/NamesContainer";
 import FavouritesText from "./components/FavouritesText";
 import Separator from "./components/Separator";
+import GenderFilter from "./components/GenderFilter";
+import "./App.css";
 
 function App() {
   const [names, setNames] = useState(babyNames);
@@ -45,9 +46,20 @@ function App() {
     );
     setFavouritesNames(filteredNames);
   }
+
+  function filterNamesBySex(e) {
+    if (e.target.value !== "none") {
+      setNames(babyNames.filter((item) => item.sex === e.target.value));
+    } else {
+      setNames(babyNames);
+    }
+  }
+
   return (
     <div className="App">
+      <h1 className="title">Baby Name Picker</h1>
       <SearchBar handleChange={handleInputChange} />
+      <GenderFilter handleCheck={filterNamesBySex} />
       <Separator />
       <FavouritesText />
       <NamesContainer
