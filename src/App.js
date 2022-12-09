@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import babyNames from "./babyNamesData.json";
 import SearchBar from "./components/SearchBar";
 import NamesContainer from "./components/NamesContainer";
@@ -10,6 +10,8 @@ import "./App.css";
 function App() {
   const [names, setNames] = useState(babyNames);
   const [favouritesNames, setFavouritesNames] = useState([]);
+  const [filteredNames, setFilteredNames] = useState([]);
+  const [searchVal, setSearchVal] = useState("");
 
   let sortedNames = names.sort((a, b) => {
     let nA = a.name.toLowerCase();
@@ -17,11 +19,19 @@ function App() {
     return nA < nB ? -1 : nA > nB ? 1 : 0;
   });
 
+  useEffect(() => {
+    if (searchVal !== "") {
+      let filtered = names.filter((baby) =>
+        baby.name.toLowerCase().includes(searchVal)
+      );
+      setFilteredNames(filtered);
+    } else {
+      setFilteredNames(names);
+    }
+  }, [names, searchVal]);
+
   function handleInputChange(e) {
-    let names = sortedNames.filter((baby) =>
-      baby.name.toLowerCase().includes(e.target.value.toLowerCase())
-    );
-    setNames(names);
+    setSearchVal(e.target.value.toLowerCase());
   }
 
   function addNameToFavourites(e) {
@@ -50,7 +60,7 @@ function App() {
   return (
     <div className="App">
       <h1 className="title">Baby Name Picker</h1>
-      <SearchBar handleChange={handleInputChange} />
+      <SearchBar handleChange={(e) => handleInputChange(e)} />
       <GenderFilter handleCheck={filterNamesBySex} />
       <Separator />
       <FavouritesText />
@@ -59,7 +69,10 @@ function App() {
         handleClick={removeNameFromFavourites}
       />
       <Separator />
-      <NamesContainer names={names} handleClick={addNameToFavourites} />
+      <NamesContainer
+        names={searchVal ? filteredNames : names}
+        handleClick={addNameToFavourites}
+      />
     </div>
   );
 }
