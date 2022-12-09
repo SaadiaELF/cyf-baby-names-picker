@@ -14,20 +14,13 @@ function App() {
   let sortedNames = names.sort((a, b) => {
     let nA = a.name.toLowerCase();
     let nB = b.name.toLowerCase();
-
-    if (nA < nB) {
-      return -1;
-    }
-    if (nA > nB) {
-      return 1;
-    }
-    return 0;
+    return nA < nB ? -1 : nA > nB ? 1 : 0;
   });
 
   function handleInputChange(e) {
-    let names = sortedNames.filter((baby) => {
-      return baby.name.toLowerCase().includes(e.target.value.toLowerCase());
-    });
+    let names = sortedNames.filter((baby) =>
+      baby.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
     setNames(names);
   }
 
@@ -49,12 +42,11 @@ function App() {
 
   function filterNamesBySex(e) {
     if (e.target.value !== "none") {
-      setNames(babyNames.filter((item) => item.sex === e.target.value));
+      setNames(babyNames.filter(({ sex }) => sex === e.target.value));
     } else {
       setNames(babyNames);
     }
   }
-
   return (
     <div className="App">
       <h1 className="title">Baby Name Picker</h1>

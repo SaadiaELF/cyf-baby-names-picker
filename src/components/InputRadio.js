@@ -1,11 +1,11 @@
 import React from "react";
 
-const InputRadio = (props) => {
+const InputRadio = ({ name, text }) => {
   return (
     <div className="gender-input">
-      <input type="radio" id={props.name} name="gender" value={props.name} />
-      <label className="label" htmlFor={props.name}>
-        {props.text}
+      <input type="radio" id={name} name="gender" value={name} />
+      <label className="label" htmlFor={name}>
+        {text}
       </label>
     </div>
   );
